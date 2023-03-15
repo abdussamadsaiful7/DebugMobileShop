@@ -9,7 +9,8 @@ const displayPhones = (phones, dataLimit) =>{
     const phonesContainer = document.getElementById('phones-container');
     // phonesContainer.textContent = '';
     // display 10 phones only 
-    const showAll = document.getElementById('btn-show-all');
+    const showAll = document.getElementById('showAllDiv');
+    //document.getElementById('show-all').innerHTML ='';
     if(dataLimit && phones.length > 10) {
         phones = phones.slice(0, 10);
         showAll.classList.remove('d-none');
@@ -21,7 +22,6 @@ const displayPhones = (phones, dataLimit) =>{
 
     // display no phones found
     const noPhone = document.getElementById('no-found-message');
-    //const phonesContainer = document.getElementById('phones-container');
     if(phones.length === 0){
         noPhone.classList.remove('d-none');
     }
@@ -33,7 +33,7 @@ const displayPhones = (phones, dataLimit) =>{
         console.log(phone)
         const phoneDiv  = document.createElement('div');
         phoneDiv.classList.add('col');
-        phoneDiv.innerHTML += `
+        phoneDiv.innerHTML = `
         <div class="card p-4">
             <img src="${phone.image}" class="card-img-top" alt="...">
             <div class="card-body">
@@ -59,6 +59,7 @@ const processSearch = (dataLimit) =>{
 
 // handle search button click
 document.getElementById('btn-search').addEventListener('click', function(){
+    document.getElementById('search-field').value ='';
     //console.log('ok')
     // start loader
     processSearch(10);
@@ -67,6 +68,7 @@ document.getElementById('btn-search').addEventListener('click', function(){
 // search input field enter key handler
 document.getElementById('search-field').addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
+        document.getElementById('search-field').value ='';
         processSearch(10);
     }
 });
@@ -83,12 +85,12 @@ const toggleSpinner = isLoading => {
 
 
 // not the best way to load show All
-document.getElementById('btn-show-all').addEventListener('click', function(){
+document.getElementById('show-all').addEventListener('click', function(){
     processSearch();
 })
 
 const loadPhoneDetails = async id =>{
-    const url =`www.openapi.programming-hero.com/api/phone/${id}`;
+    const url =`https://openapi.programming-hero.com/api/phone/${id}`;
     const res = await fetch(url);
     const data = await res.json();
     displayPhoneDetails(data.data);
@@ -108,4 +110,4 @@ const displayPhoneDetails = phone =>{
     `
 }
 
-loadPhones('iphone');
+loadPhones('oppo');
