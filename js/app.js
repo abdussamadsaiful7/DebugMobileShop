@@ -7,6 +7,7 @@ const loadPhones = async(searchText, dataLimit) =>{
 
 const displayPhones = (phones, dataLimit) =>{
     const phonesContainer = document.getElementById('phones-container');
+    phonesContainer.textContent ='';
     // phonesContainer.textContent = '';
     // display 10 phones only 
     const showAll = document.getElementById('showAllDiv');
@@ -59,7 +60,7 @@ const processSearch = (dataLimit) =>{
 
 // handle search button click
 document.getElementById('btn-search').addEventListener('click', function(){
-    document.getElementById('search-field').value ='';
+    //document.getElementById('search-field').value ='';
     //console.log('ok')
     // start loader
     processSearch(10);
@@ -68,7 +69,7 @@ document.getElementById('btn-search').addEventListener('click', function(){
 // search input field enter key handler
 document.getElementById('search-field').addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
-        document.getElementById('search-field').value ='';
+        //document.getElementById('search-field').value ='';
         processSearch(10);
     }
 });
